@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import TopBar from './layout/TopBar.js';
 import Footer from './layout/Footer.js';
-import { BrowserRouter, Match, Miss, Link } from 'react-router'
+import { BrowserRouter, Redirect, Match, Miss, Link } from 'react-router'
 
 const Home = () => (
   <div>
@@ -29,19 +29,29 @@ class App extends Component {
 	  <BrowserRouter>
 		<section className="hero is-primary is-fullheight">
 			<TopBar >
-				<Link to="/" className="nav-item">Home</Link>
-				<Link to="/about" className="nav-item">About</Link>
-				<Link to="/topics" className="nav-item">Topics</Link>
-			</TopBar>
+        <Link activeClassName="is-active" to="/home" className="nav-item">
+          Home
+        </Link>
+        <Link activeClassName="is-active" to="/about" className="nav-item">
+          About
+        </Link>
+        <Link activeClassName="is-active" to="/topics" className="nav-item">
+          Topics
+        </Link>
+      </TopBar>
+
 			<div className="hero-body">
 				<div className="container has-text-centered">
-				  <Match exactly pattern="/" component={Home} />
+          <Match pattern="/" exactly render={ () => (
+              <Redirect to="/home"/>
+          )}/>
+				  <Match exactly pattern="/home" component={Home} />
 				  <Match pattern="/about" component={About} />
 				  <Miss component={NoMatch}/>
 				</div>
 			</div>
 			<Footer />
-		</section>	
+		</section>
 		  </BrowserRouter>
     );
   }
