@@ -9,6 +9,7 @@
     "style-loader": "^0.13.1"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "bulma": "^0.2.3",
     "classnames": "^2.2.5",
     "history": "^4.5.0",
