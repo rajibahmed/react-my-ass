@@ -12,8 +12,8 @@ export default class Home extends React.Component {
     super(props);
     this.state = {projects: [ {name: 'hellow'}, {name: 'meiww'} ] } ;
   }
-   componentDidMount() {
-     var self = this;
+  componentDidMount() {
+    var self = this;
 
     axios.get('https://api.github.com/users/rajibahmed/repos',{
       headers: {
@@ -21,8 +21,8 @@ export default class Home extends React.Component {
       }
     })
       .then(response => response.data )
-      .then((data) => { return data.map(r => { name: r.full_name } ) })
-      .then(names => self.setState({ projects: names } ))
+      .then((data) => { return data.map(r => ({name: r.full_name}))})
+      .then((names) => self.setState({projects: names}))
   }
   render() {
     let projects = this.state.projects
